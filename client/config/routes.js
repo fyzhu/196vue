@@ -1,5 +1,5 @@
-import Todo from '../views/todo/todo.vue'
-import Login from '../views/login/login.vue'
+// import Todo from '../views/todo/todo.vue'
+// import Login from '../views/login/login.vue'
 
 export default [
   {
@@ -8,26 +8,35 @@ export default [
   },
   {
     path: '/app/:id',
-    component: Todo,
+    // path: '/app',
+    props: true,
+    component: () => import('../views/todo/todo.vue'),
     name: 'app',
     meta: {
       title: 'this is app',
-      description: 'this is description',
-      keywords: 'this is keywords'
+      keywords: 'this is keywords',
+      description: 'this is description'
     },
-    children: [
-      {
-        path: 'test',
-        component: Login
-      }
-    ]
+    beforeEnter (to, from, next) {
+      console.log('beforeEnter')
+      next()
+    }
+    // children: [
+    //   {
+    //     path: 'test',
+    //     component: Login
+    //   }
+    // ]
   },
   {
     path: '/login',
-    component: Login
-  },
-  {
-    path: '/login/exact',
-    component: Login
+    components: {
+      default: () => import('../views/login/login.vue')
+      // a: Todo
+    }
   }
+  // {
+  //   path: '/login/exact',
+  //   component: Login
+  // }
 ]
