@@ -8,6 +8,20 @@ export default () => {
     mode: 'history',
     // base: '/base/',
     linkActiveClass: 'active-link',
-    linkExactActiveClass: 'exact-active-link'
+    linkExactActiveClass: 'exact-active-link',
+    scrollBehavior (to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return {x: 0, y: 0}
+      }
+    },
+    parseQuery (query) {
+
+    },
+    stringfyQuery (obj) {
+
+    },
+    fallback: true
   })
 }
